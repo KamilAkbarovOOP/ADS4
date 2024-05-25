@@ -1,37 +1,22 @@
 import java.util.Objects;
-public class Edge<Vertex>{
-    private Vertex source;
-    private Vertex dest;
+
+public class Edge<V> {
+    private Vertex<V> source;
+    private Vertex<V> dest;
     private Double weight;
 
-    public Edge(Vertex source, Vertex dest, Double weight) {
+    public Edge(Vertex<V> source, Vertex<V> dest, Double weight) {
         this.source = source;
         this.dest = dest;
         this.weight = weight;
     }
 
-    public Edge(Vertex source, Vertex dest){
-        this.source = source;
-        this.dest = dest;
-    }
-
-    public void setSource(Vertex source){
-        this.source =source;
-    }
-
-    public Vertex getSource(){
+    public Vertex<V> getSource() {
         return source;
     }
 
-    public void setDest(Vertex dest){
-        this.dest = dest;
-    }
-    public Vertex getDest(){
+    public Vertex<V> getDest() {
         return dest;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
     }
 
     public Double getWeight() {
@@ -39,17 +24,16 @@ public class Edge<Vertex>{
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
-            return true;
-        }
-        if(o == null || getClass() != o.getClass()){
-            return false;
-        }
-        Edge<?> otherEdge = (Edge<?>) o;
-
-        return Objects.equals(this.source, otherEdge.source) &&
-                Objects.equals(this.dest, otherEdge.dest);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Edge<?> edge = (Edge<?>) o;
+        return Objects.equals(source, edge.source) &&
+                Objects.equals(dest, edge.dest);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(source, dest);
+    }
 }

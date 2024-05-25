@@ -1,38 +1,43 @@
-import java.util.*;
-public class Vertex<V>{
-    private V data;
-    private Map<Vertex <V>, Double> adjucentVertices;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
-    public void addAdjacentVertex(Vertex<V> dest, double weight){
-        adjucentVertices.put(dest, weight);
-    }
+public class Vertex<V> {
+    private String data;
+    private Map<Vertex<V>, Double> adjacentVertices;
 
-    public Vertex (V data){
+    public Vertex(String data) {
         this.data = data;
-        this.adjucentVertices = new HashMap<>();
+        this.adjacentVertices = new HashMap<>();
     }
 
-    public void setData(){
-        this.data = data;
-    }
-    public V getData(){
+    public String getData() {
         return data;
     }
 
-    public Map<Vertex<V>, Double> getAdjucentVertices(){
-        return adjucentVertices;
+    public void addAdjacentVertex(Vertex<V> dest, double weight) {
+        adjacentVertices.put(dest, weight);
+    }
+
+    public Map<Vertex<V>, Double> getAdjacentVertices() {
+        return adjacentVertices;
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
-            return true;
-        }
-        if(o == null || getClass() != o.getClass()){
-            return false;
-        }
-        Vertex<?> vertex = (Vertex<?>) o;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vertex<V> vertex = (Vertex<V>) o;
         return Objects.equals(data, vertex.data);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(data);
+    }
+
+    @Override
+    public String toString() {
+        return data;
+    }
 }
